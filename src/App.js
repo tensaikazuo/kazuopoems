@@ -1,9 +1,11 @@
 import React from 'react'
 import { Root, Routes, addPrefetchExcludes } from 'react-static'
 //
-import { Link, Router } from 'components/Router'
+import { Switch, Route, Link } from 'react-router-dom'
 
 import './app.css'
+import Header from 'components/HeaderNav'
+import Footer from 'components/Footer'
 
 // Any routes that start with 'dynamic' will be treated as non-static routes
 // addPrefetchExcludes(['dynamic'])
@@ -11,16 +13,15 @@ import './app.css'
 function App() {
   return (
     <Root>
-      <nav>
-        <Link to="/">Home</Link>
-      </nav>
+      <Header />
       <div className="content">
         <React.Suspense fallback={<em>Loading...</em>}>
-          <Router>
-            <Routes path="*" />
-          </Router>
+          <Switch>
+            <Route render={() => <Routes />} />
+          </Switch>
         </React.Suspense>
       </div>
+      <Footer />
     </Root>
   )
 }
